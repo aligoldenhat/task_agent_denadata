@@ -126,7 +126,7 @@ LangGraph gives a graph which is suitable for simple ReAct loop. there is a rout
 
 LangGraph's built-in checkpointer stores the full message history keyed by `thread_id` (your `conversation_id`). SQLite is used over in-memory storage so sessions survive restarts.
 
-### Pandas tools over raw SQL
+### Pandas tools
 
 The data is static CSV — pandas is simpler, faster to iterate on. Each tool function computes its answer directly from the DataFrame, making hallucination structurally impossible (the LLM never sees raw data).
 
