@@ -15,7 +15,7 @@ LOGGING_CONFIG = {
     "formatters": {
         "unified": {
             "()": uvicorn.logging.DefaultFormatter,
-            "format": "%(asctime)s | %(name)-18s | %(levelname)-5s | %(message)s",
+            "format": "%(asctime)s | %(name)-23s | %(levelname)-5s | %(message)s",
             "use_colors": False,
         },
     },
