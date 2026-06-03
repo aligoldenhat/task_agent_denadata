@@ -153,3 +153,37 @@ async def test_conversation_memory(client):
             "Open",
         ]
     )
+
+
+# out of scope
+async def test_out_of_scope(client):
+    """Agent must decline questions outside tasks/personnel domain."""
+    answer = await ask(client, "آب و هوای تهران چطوره؟", _conv())
+    assert any(
+        w in answer
+        for w in [
+            "نمی‌توانم",
+            "نمی توانم",
+            "فقط می‌توانم",
+            "فقط میتوانم",
+            "خارج",
+            "حوزه",
+            "cannot",
+            "outside",
+            "only",
+            "تسک",
+            "سازمانی",
+            "پرسنل",
+        ]
+    )
+
+
+async def test_ambiguous_question(client):
+    """Agent must ask for clarification on vague questions."""
+    answer = await ask(client, "تسک‌ها را نشان بده", _conv())
+    # should ask a clarifying question, not dump all 150 tasks
+    assert (
+        "?" in answer
+        or "؟" in answer
+        or any(w in answer for w in ["کدام", "چه", "منظور", "which", "what"])
+    )
