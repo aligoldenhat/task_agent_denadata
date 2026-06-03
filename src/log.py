@@ -1,11 +1,13 @@
 import logging
+import logging.handlers
 import uvicorn
+import uvicorn.logging
 import os
 import sys
 from src.config import settings
 
-LOG_DIR = settings.LOG_DIR
-os.makedirs(LOG_DIR, exist_ok=True)
+LOG_PATH = settings.LOG_PATH
+os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
 
 LOGGING_CONFIG = {
     "version": 1,
@@ -26,7 +28,7 @@ LOGGING_CONFIG = {
         "file": {
             "class": logging.handlers.RotatingFileHandler,
             "formatter": "unified",
-            "filename": f"{LOG_DIR}/app.log",
+            "filename": f"{LOG_PATH}",
             "mode": "a",
             "encoding": "utf-8",
             "maxBytes": 10 * 1024 * 1024,  # 10 MB

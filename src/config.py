@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     APP_TITLE: str = "Task Agent Denadata"
 
     LOG_LEVEL: str = "INFO"
-    LOG_DIR: str = "logs"
+    LOG_PATH: str = "logs/app.log"
 
     # OPENAI settings
     OPENAI_API_KEY: str = Field(...)
