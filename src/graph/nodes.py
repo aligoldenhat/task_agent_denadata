@@ -35,6 +35,7 @@ def make_llm():
         openai_api_key=settings.OPENAI_API_KEY,
         openai_proxy=settings.OPENAI_PROXY,
         timeout=30,
+        max_retries=2,
     ).bind_tools(ALL_TOOLS)
 
 
