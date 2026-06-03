@@ -1,7 +1,7 @@
 import logging
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 from src.log import LOGGING_CONFIG
 
@@ -24,6 +24,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan, title=settings.APP_TITLE)
+
+
+@app.middleware("http")
+async def no_cache_middleware(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+    return response
 
 
 @app.get("/health")
