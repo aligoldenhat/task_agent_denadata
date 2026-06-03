@@ -13,6 +13,8 @@ cp .env.example .env
 docker compose up --build
 ```
 
+Docker Compose overrides DB_PATH, LOG_PATH, TASK_CSV, and USERS_CSV automatically to container paths — you only need to set OPENAI_API_KEY in .env.
+
 ---
 
 ## Prerequisites
